@@ -21,7 +21,7 @@ export function ConnectPage() {
                 flexDirection: "column",
                 justifyContent: "center",   
                 alignItems: "center",       
-                height: "90.5vh",             
+                height: "87vh",             
                 width: "100%",              
                 overflow: "hidden"          
             }}

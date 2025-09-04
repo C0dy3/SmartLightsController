@@ -7,15 +7,15 @@ export function Header(){
         <Box sx={{
             flexGrow: 3, 
             display: 'flex',
-            justifyContent: "space-between",
             backgroundColor: "#4c67bd",
-            flexDirection: "row",
-            alignItems: "center",
+            flexDirection: "column",
+            alignItems: "right",
             padding: 1
             
         }}>
-            <Typography sx={{ fontSize: 25, fontWeight: 'light' }}>Hue Control</Typography>
-            <Typography>Made with love by Me 💖</Typography>
+            <Box>
+                <Typography>Made with love by Me 💖</Typography>
+            </Box>
         </Box>
         
         
