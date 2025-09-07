@@ -2,10 +2,11 @@
 import type {LightReadDto} from "../Dto/LightReadDto.ts";
 import {fetchLight} from "../api/lights.ts";
 
-export const UseLight = (lightId : number) => {
-    return useQuery<LightReadDto, Error>({
-        queryKey: ["light", lightId],
-        queryFn: () => fetchLight(lightId),
+
+export const UseLight = () => {
+    return useQuery<LightReadDto[], Error>({
+        queryKey: ["light"],
+        queryFn: () => fetchLight(),
         staleTime: 1000 * 30,
     });
 };
