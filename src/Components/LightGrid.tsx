@@ -1,18 +1,22 @@
 ﻿import type {LightReadDto} from "../Dto/LightReadDto.ts";
-import {Box, Button, Grid, InputLabel, List, ListItem, Paper, Slider, Stack} from "@mui/material";
+import {Box, Button, Grid, InputLabel, List, ListItem, Paper, Slider, Stack, Typography} from "@mui/material";
+import {type RgbaColor, RgbaColorPicker} from "react-colorful";
 import React from "react";
-import {SketchPicker} from 'react-color'
-import {RgbaColorPicker} from "react-colorful";
+
+
 
 interface LightGridProps{
     data : LightReadDto[]
     handleTurnOn: (lightId : number, current : boolean) => void
     handleBrightness: (value: number ,ligthId : number) => void
     handeOnColorChange: (color : {r: number; g: number; b: number, a: number}, lightId: number) => void;
+    xyToRgb: (x: number, y: number, bri: number) => RgbaColor;
+    
 }
 
 
-export function LightGrid({data, handleTurnOn, handleBrightness, handeOnColorChange} : LightGridProps){
+export function LightGrid({data, handleTurnOn, handleBrightness, handeOnColorChange, xyToRgb} : LightGridProps){
+    
     
     return (
         <Box sx={{ display: "flex", flexDirection: "column", gap: 3, p: 2 }}>
@@ -31,9 +35,21 @@ export function LightGrid({data, handleTurnOn, handleBrightness, handeOnColorCha
                     }}
                 >
                     <Box sx={{ flex: 1 }}>
-                        <ListItem>ID: {light.id}</ListItem>
-                        <ListItem>Název: {light.name}</ListItem>
-                        <ListItem>Zapnuto: {String(light.state.on)}</ListItem>
+                        <ListItem>
+                            <Typography sx={{fontSize: "1.5rem"}}>
+                                ID: {light.id}
+                            </Typography>
+                        </ListItem>
+                        <ListItem>
+                            <Typography sx={{fontSize: "1.5rem"}}>
+                                {light.name}
+                            </Typography>
+                        </ListItem>
+                        <ListItem>
+                            <Typography sx={{fontSize: "1.5rem", color: light.state.on ? "#0aff00" : "#f30c0c", boxShadow: 2}}>
+                                Zapnuto
+                            </Typography>
+                        </ListItem>
                         <ListItem>Světlost: {light.state.bri}</ListItem>
                         {light.state.hue !== undefined && (
                             <ListItem>Odstín: {light.state.hue}</ListItem>
@@ -41,6 +57,7 @@ export function LightGrid({data, handleTurnOn, handleBrightness, handeOnColorCha
                         {light.state.sat !== undefined && (
                             <ListItem>Saturace: {light.state.sat}</ListItem>
                         )}
+                        <ListItem>Barva: {light.state.xy}</ListItem>
                     </Box>
 
                     <Stack sx={{ width: "20rem" }} spacing={2}>
@@ -65,7 +82,8 @@ export function LightGrid({data, handleTurnOn, handleBrightness, handeOnColorCha
                         </Button>
                         
                     </Stack>
-                        <RgbaColorPicker onChange={(color) => handeOnColorChange(color, light.id)}/>
+                        <RgbaColorPicker color={xyToRgb(light.state.xy[0],light.state.xy[1], light.state.bri)}
+                        onChange={(color) => handeOnColorChange(color, light.id)}/>
                 </Paper>
             ))}
         </Box>

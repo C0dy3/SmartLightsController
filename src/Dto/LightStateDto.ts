@@ -4,4 +4,5 @@
     hue : number
     sat : number
     effect : string
+    xy: number[]
 }

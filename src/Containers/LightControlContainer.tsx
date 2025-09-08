@@ -4,6 +4,7 @@ import {UseLight} from "../Hooks/UseLight.ts";
 import {Loading} from "../Components/Loading.tsx";
 import {LightGrid} from "../Components/LightGrid.tsx";
 import {usePutUpdateColor} from "../Hooks/UsePutUpdateColor.ts";
+import type {RgbaColor} from "react-colorful";
 
 export function LightControlContainer(){
     const {mutate, isPending} = useUpdateLights(1);
@@ -48,6 +49,36 @@ export function LightControlContainer(){
     }
 
 
+    function xyToRgb(x: number, y: number, bri: number) : RgbaColor {
+        if (y === 0) y = 0.0000001; // prevence dělení nulou
+
+        // převod XY + bri na XYZ
+        const z = 1.0 - x - y
+        const Y = bri / 254 // normalizace jasu 0..1
+        const X = (Y / y) * x
+        const Z = (Y / y) * z
+
+        // převod XYZ → linear RGB
+        let r = X * 1.656492 - Y * 0.354851 - Z * 0.255038
+        let g = -X * 0.707196 + Y * 1.655397 + Z * 0.036152
+        let b = X * 0.051713 - Y * 0.121364 + Z * 1.011530
+
+        // gamma korekce
+        r = r <= 0.0031308 ? 12.92 * r : 1.055 * Math.pow(r, 1 / 2.4) - 0.055
+        g = g <= 0.0031308 ? 12.92 * g : 1.055 * Math.pow(g, 1 / 2.4) - 0.055
+        b = b <= 0.0031308 ? 12.92 * b : 1.055 * Math.pow(b, 1 / 2.4) - 0.055
+
+        // ořez do rozsahu 0..1
+        r = Math.min(Math.max(r, 0), 1)
+        g = Math.min(Math.max(g, 0), 1)
+        b = Math.min(Math.max(b, 0), 1)
+
+        return {
+            r: Math.round(r * 255),
+            g: Math.round(g * 255),
+            b: Math.round(b * 255)
+        }
+    }
 
     const HandleOnColorChange = (color : {r: number; g: number; b: number; a: number}, lightId: number) => {
         const[x,y] = rgbToXy({r:color.r, g:color.g, b:color.b});
@@ -76,7 +107,9 @@ export function LightControlContainer(){
                 data={Object.values(data)} 
                 handleTurnOn={HandleTurnOn} 
                 handleBrightness={HandleBrightness} 
-                handeOnColorChange={HandleOnColorChange} />
+                handeOnColorChange={HandleOnColorChange}
+                xyToRgb={xyToRgb}
+            />
         )
     }
 
