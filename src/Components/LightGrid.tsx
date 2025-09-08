@@ -1,15 +1,18 @@
 ﻿import type {LightReadDto} from "../Dto/LightReadDto.ts";
 import {Box, Button, Grid, InputLabel, List, ListItem, Paper, Slider, Stack} from "@mui/material";
 import React from "react";
+import {SketchPicker} from 'react-color'
+import {RgbaColorPicker} from "react-colorful";
 
 interface LightGridProps{
     data : LightReadDto[]
     handleTurnOn: (lightId : number, current : boolean) => void
     handleBrightness: (value: number ,ligthId : number) => void
+    handeOnColorChange: (color : {r: number; g: number; b: number, a: number}, lightId: number) => void;
 }
 
 
-export function LightGrid({data, handleTurnOn, handleBrightness} : LightGridProps){
+export function LightGrid({data, handleTurnOn, handleBrightness, handeOnColorChange} : LightGridProps){
     
     return (
         <Box sx={{ display: "flex", flexDirection: "column", gap: 3, p: 2 }}>
@@ -40,7 +43,7 @@ export function LightGrid({data, handleTurnOn, handleBrightness} : LightGridProp
                         )}
                     </Box>
 
-                    <Stack sx={{ width: "20rem" }}>
+                    <Stack sx={{ width: "20rem" }} spacing={2}>
                         <InputLabel>Jasnost</InputLabel>
                         <Slider
                             defaultValue={light.state.bri}
@@ -60,7 +63,9 @@ export function LightGrid({data, handleTurnOn, handleBrightness} : LightGridProp
                         >
                             {light.state.on ? "Vypnout" : "Zapnout"}
                         </Button>
+                        
                     </Stack>
+                        <RgbaColorPicker onChange={(color) => handeOnColorChange(color, light.id)}/>
                 </Paper>
             ))}
         </Box>

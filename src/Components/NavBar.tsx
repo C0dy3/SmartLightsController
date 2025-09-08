@@ -7,15 +7,6 @@ import {
 import React from "react";
 import { MenuItem, Sidebar, Submenu, Menu} from "react-mui-sidebar";
 
-
-
-
-function UseHandleNavigation({url, tooltip, children, isactive, onClick}){
-    const navigate = useNavigate();
-    
-    
-}
-
 interface DrawerProps {
     isOpen: boolean;
     darkMode: boolean;
@@ -29,16 +20,16 @@ export function NavBar({ isOpen, darkMode }: DrawerProps) {
             themeColor="#4c67bd"
             themeSecondaryColor="#4c5159"
             mode={darkMode ? "dark" : "light"}
-            isCollapse={!isOpen} // nebo isOpen, podle libu
+            isCollapse={!isOpen}
         >
             <Menu subHeading="HLAVNÍ">
                 <MenuItem component={Link} link="/lights" badge isSelected>
                     Světla
                 </MenuItem>
-                <MenuItem component={Link} link="/test">Skupiny</MenuItem>
+                <MenuItem component={Link} link="/groups">Skupiny</MenuItem>
                 <MenuItem component={Link} link="/ana">Scény</MenuItem>
             </Menu>
-            <Menu subHeading="NASTAVENÍ">
+            <Menu>
                 <Submenu title="Konfigurace">
                     <MenuItem>Most</MenuItem>
                     <MenuItem>Světla</MenuItem>
@@ -55,7 +46,7 @@ export function DrawerContainer() {
     const toggleDrawer = () => setOpen((prev) => !prev);
 
     return (
-        <Box sx={{width: "auto"}}>
+        <Box sx={{width: "15rem"}}>
             <Button onClick={toggleDrawer}>
                 {open ? "Close drawer" : "Open drawer"}
             </Button>
