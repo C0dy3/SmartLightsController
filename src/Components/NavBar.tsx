@@ -1,42 +1,124 @@
-﻿import {useNavigate} from "@tanstack/react-router";
-import {
+﻿import {
     Box,
     Button,
-    Link
+    AppBar,
+    Container,
+    Toolbar,
+    Typography,
+    IconButton,
+    Tooltip,
+    Avatar
 } from "@mui/material";
 import React from "react";
-import { MenuItem, Sidebar, Submenu, Menu} from "react-mui-sidebar";
+import { MenuItem, Menu} from "react-mui-sidebar";
 
 interface DrawerProps {
     isOpen: boolean;
     darkMode: boolean;
 }
 
-export function NavBar({ isOpen, darkMode }: DrawerProps) {
+export function NavBar() {
     return (
-        <Sidebar
-            width="auto"
-            showProfile={false}
-            themeColor="#4c67bd"
-            themeSecondaryColor="#4c5159"
-            mode={darkMode ? "dark" : "light"}
-            isCollapse={!isOpen}
-        >
-            <Menu subHeading="HLAVNÍ">
-                <MenuItem component={Link} link="/lights" badge isSelected>
-                    Světla
-                </MenuItem>
-                <MenuItem component={Link} link="/groups">Skupiny</MenuItem>
-                <MenuItem component={Link} link="/ana">Scény</MenuItem>
-            </Menu>
-            <Menu>
-                <Submenu title="Konfigurace">
-                    <MenuItem>Most</MenuItem>
-                    <MenuItem>Světla</MenuItem>
-                </Submenu>
-                <MenuItem>Nastavení</MenuItem>
-            </Menu>
-        </Sidebar>
+        <AppBar>
+            <Container maxWidth="xl">
+                <Toolbar disableGutters>
+                    <Typography
+                        variant="h6"
+                        noWrap
+                        component="a"
+                        href="#app-bar-with-responsive-menu"
+                        sx={{
+                            mr: 2,
+                            display: { xs: 'none', md: 'flex' },
+                            fontFamily: 'monospace',
+                            fontWeight: 700,
+                            letterSpacing: '.3rem',
+                            color: 'inherit',
+                            textDecoration: 'none',
+                        }}
+                    >
+                        LOGO
+                    </Typography>
+
+                    <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
+                        <IconButton
+                            size="large"
+                            aria-label="account of current user"
+                            aria-controls="menu-appbar"
+                            aria-haspopup="true"
+                            //onClick={handleOpenNavMenu}
+                            color="inherit"
+                        >
+
+                        </IconButton>
+                        <Menu
+                            id="menu-appbar"
+
+                            anchorOrigin={{
+                                vertical: 'bottom',
+                                horizontal: 'left',
+                            }}
+                            keepMounted
+                            transformOrigin={{
+                                vertical: 'top',
+                                horizontal: 'left',
+                            }}
+
+                            sx={{ display: { xs: 'block', md: 'none' } }}
+                        >
+
+                        </Menu>
+                    </Box>
+
+                    <Typography
+                        variant="h5"
+                        noWrap
+                        component="a"
+                        href="#app-bar-with-responsive-menu"
+                        sx={{
+                            mr: 2,
+                            display: { xs: 'flex', md: 'none' },
+                            flexGrow: 1,
+                            fontFamily: 'monospace',
+                            fontWeight: 700,
+                            letterSpacing: '.3rem',
+                            color: 'inherit',
+                            textDecoration: 'none',
+                        }}
+                    >
+                        LOGO
+                    </Typography>
+                    <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
+                        <Button>Hello</Button>
+                    </Box>
+                    <Box sx={{ flexGrow: 0 }}>
+                        <Tooltip title="Open settings">
+                            <IconButton onClick={undefined} sx={{ p: 0 }}>
+                                <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
+                            </IconButton>
+                        </Tooltip>
+                        <Menu
+                            //sx={{ mt: '45px' }}
+                            id="menu-appbar"
+                            anchorEl={undefined}
+                            anchorOrigin={{
+                                vertical: 'top',
+                                horizontal: 'right',
+                            }}
+                            keepMounted
+                            transformOrigin={{
+                                vertical: 'top',
+                                horizontal: 'right',
+                            }}
+                            //open={Boolean(anchorElUser)}
+                            //onClose={handleCloseUserMenu}
+                        >
+
+                        </Menu>
+                    </Box>
+                </Toolbar>
+            </Container>
+        </AppBar>
     );
 }
 
@@ -46,10 +128,7 @@ export function DrawerContainer() {
     const toggleDrawer = () => setOpen((prev) => !prev);
 
     return (
-        <Box sx={{width: "15rem"}}>
-            <Button onClick={toggleDrawer}>
-                {open ? "Close drawer" : "Open drawer"}
-            </Button>
+        <Box sx={{width: "auto"}}>
             <NavBar isOpen={open} darkMode={false} />
         </Box>
     );

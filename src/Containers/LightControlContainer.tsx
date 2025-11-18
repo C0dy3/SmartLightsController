@@ -74,6 +74,7 @@ export function LightControlContainer(){
         b = Math.min(Math.max(b, 0), 1)
 
         return {
+            a: 0,
             r: Math.round(r * 255),
             g: Math.round(g * 255),
             b: Math.round(b * 255)

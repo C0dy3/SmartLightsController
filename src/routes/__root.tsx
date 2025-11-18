@@ -11,13 +11,15 @@ export const Route = createRootRoute({
 
 function RootComponent() {
   return (
-      <Box sx={{ display: "flex", flexDirection: "row", height: "auto", width: "auto" }}>
-          
-          <Box sx={{ width: "auto", flexShrink: 0 }}>
+      <Box sx={{ display: "flex", flexDirection: "column", height: "auto", width: "auto" }}>
+          <Box sx={{ flex: 1,
+              alignItems: "center",
+              flexGrow: 10,
+              display: "flex",
+              justifyContent: "space-between" ,
+              flexDirection: "column" }}>
               <DrawerContainer />
           </Box>
-
-          
           <Box sx={{ display: "flex", flexDirection: "column", flex: 1 }}>
               <Header />
               <Box sx={{ flexGrow: 1, overflow: "auto" }}>
