@@ -73,8 +73,7 @@ export function NavBar() {
                                 horizontal: 'left',
                             }}
 
-                            sx={{ display: { xs: 'block', md: 'none' } }}
-                        >
+                            sx={{display: {xs: 'block', md: 'none'}}} open={false}                        >
 
                         </Menu>
                     </Box>

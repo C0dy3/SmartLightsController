@@ -4,5 +4,5 @@ export function FetchErrorPage(){
         <Box>
             <Alert severity="error">Při načítání dat z HUE bridge došlo k chybě</Alert>
         </Box>
-    );
+    )
 }

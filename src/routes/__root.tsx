@@ -11,6 +11,7 @@ export const Route = createRootRoute({
 function RootComponent() {
   return (
 
+      <Box>
         <Box
             sx={{
                 display: "flex",
@@ -20,11 +21,12 @@ function RootComponent() {
             }}
         >
             <NavBar />
-            <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
+            <Box component="main" sx={{ flexGrow: 3, p: 3 }}>
                 <Outlet />
             </Box>
-            <Footer />
         </Box>
+          <Footer />
+      </Box>
 
   )
 }
