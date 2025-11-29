@@ -99,7 +99,7 @@ export function LightControlContainer(){
 
     if (error){
         return (
-            <FetchErrorPage/>
+            <FetchErrorPage error={error} />
         )
     }
 

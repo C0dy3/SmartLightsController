@@ -30,7 +30,7 @@ export function NavBar() {
 
 
     return (
-        <AppBar>
+        <AppBar position="static">
             <Container maxWidth="xl">
                 <Toolbar disableGutters>
                     <Typography
