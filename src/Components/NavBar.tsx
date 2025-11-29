@@ -7,17 +7,28 @@
     Typography,
     IconButton,
     Tooltip,
-    Avatar
+    Avatar,
+    Menu
 } from "@mui/material";
-import React from "react";
-import { MenuItem, Menu} from "react-mui-sidebar";
+import {useNavigate} from "@tanstack/react-router";
 
-interface DrawerProps {
-    isOpen: boolean;
-    darkMode: boolean;
-}
+
+const pages = ["lights","groups","settings"]
+
+
 
 export function NavBar() {
+
+    const navigate = useNavigate();
+
+
+    const handleOnPageChange = (page : string) => {
+        navigate({to: `/${page}`})
+    };
+
+
+
+
     return (
         <AppBar>
             <Container maxWidth="xl">
@@ -37,7 +48,7 @@ export function NavBar() {
                             textDecoration: 'none',
                         }}
                     >
-                        LOGO
+                        HUE CONTROLL
                     </Typography>
 
                     <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
@@ -52,8 +63,6 @@ export function NavBar() {
 
                         </IconButton>
                         <Menu
-                            id="menu-appbar"
-
                             anchorOrigin={{
                                 vertical: 'bottom',
                                 horizontal: 'left',
@@ -86,10 +95,16 @@ export function NavBar() {
                             textDecoration: 'none',
                         }}
                     >
-                        LOGO
+                        ControleIT
                     </Typography>
-                    <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
-                        <Button>Hello</Button>
+                    <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex', alignItems: 'center' } }}>
+                        {pages.map((page) => (
+                            <Button sx={{}} onClick={() => handleOnPageChange(page)}>
+                                <Typography sx={{color: "black"}}>
+                                    {page}
+                                </Typography>
+                            </Button>
+                            ))}
                     </Box>
                     <Box sx={{ flexGrow: 0 }}>
                         <Tooltip title="Open settings">
@@ -122,14 +137,4 @@ export function NavBar() {
     );
 }
 
-export function DrawerContainer() {
-    const [open, setOpen] = React.useState(false);
 
-    const toggleDrawer = () => setOpen((prev) => !prev);
-
-    return (
-        <Box sx={{width: "auto"}}>
-            <NavBar isOpen={open} darkMode={false} />
-        </Box>
-    );
-}

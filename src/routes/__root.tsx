@@ -2,8 +2,7 @@ import * as React from 'react'
 import { Outlet, createRootRoute } from '@tanstack/react-router'
 import {Footer} from "../Components/Footer.tsx";
 import {Box} from "@mui/material";
-import {DrawerContainer} from "../Components/NavBar.tsx";
-import {Header} from "../Components/Header.tsx";
+import { NavBar} from "../Components/NavBar.tsx";
 
 export const Route = createRootRoute({
   component: RootComponent,
@@ -11,22 +10,21 @@ export const Route = createRootRoute({
 
 function RootComponent() {
   return (
-      <Box sx={{ display: "flex", flexDirection: "column", height: "auto", width: "auto" }}>
-          <Box sx={{ flex: 1,
-              alignItems: "center",
-              flexGrow: 10,
-              display: "flex",
-              justifyContent: "space-between" ,
-              flexDirection: "column" }}>
-              <DrawerContainer />
-          </Box>
-          <Box sx={{ display: "flex", flexDirection: "column", flex: 1 }}>
-              <Header />
-              <Box sx={{ flexGrow: 1, overflow: "auto" }}>
-                  <Outlet /> 
-              </Box>
-              <Footer />
-          </Box>
-      </Box>
+
+        <Box
+            sx={{
+                display: "flex",
+                flexDirection: "column",
+                minHeight: "100vh",
+                width: "100%"
+            }}
+        >
+            <NavBar />
+            <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
+                <Outlet />
+            </Box>
+            <Footer />
+        </Box>
+
   )
 }
