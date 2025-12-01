@@ -6,7 +6,8 @@ import {createRouter, RouterProvider} from "@tanstack/react-router";
 import {TanStackRouterDevtools} from "@tanstack/react-router-devtools";
 import {routeTree} from "./routeTree.gen.ts";
 import {StrictMode} from "react";
-import {ReactQueryDevtools} from "@tanstack/react-query-devtools"; 
+import {ReactQueryDevtools} from "@tanstack/react-query-devtools";
+import {NotFoundPage} from "./Page/NotFoundPage.tsx"; 
 
 
 
@@ -16,7 +17,12 @@ const queryClient = new QueryClient({
 
 
 const router 
-    = createRouter({routeTree})
+    = createRouter({routeTree, defaultNotFoundComponent: () => {
+        return(
+            <NotFoundPage/>
+        )
+    }})
+
 
 
 

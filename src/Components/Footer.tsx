@@ -9,13 +9,31 @@ export function Footer(){
         <Box sx={{
             display: 'flex',
             flexDirection: 'row',
-            justifyContent: 'space-between',
             alignItems: "center",
             padding: 1,
-            backgroundColor: "#4C67BDFF"
+            backgroundColor: "rgba(255,255,255,0.37)",
+            minWidth: "100%"
+            
         }}>
-            <Typography>v 0.0.1</Typography>
-            <Link>Github</Link>
+            <Box sx={{display: "flex", 
+                flexDirection: "row", 
+                alignItems: "center", 
+                justifyContent: "space-between",
+                paddingLeft: 2, 
+                gap: 2}}>
+                <Typography>v 0.0.1</Typography>
+                <Link>Github</Link>
+                <Box sx={{
+                    position: "absolute",
+                    left: "50%",
+                    transform: "translateX(-50%)", 
+                    whiteSpace: "nowrap"
+                }}>
+                    <Typography>Made by Štěpán Šmídl</Typography>
+                </Box>
+                
+            </Box>
+           
         </Box>
         
         

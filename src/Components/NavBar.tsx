@@ -6,14 +6,12 @@
     Toolbar,
     Typography,
     IconButton,
-    Tooltip,
-    Avatar,
-    Menu
+    Menu, Divider
 } from "@mui/material";
 import {useNavigate} from "@tanstack/react-router";
 
 
-const pages = ["lights","groups","settings"]
+const pages = ["lights","groups","settings","about"]
 
 
 
@@ -26,11 +24,14 @@ export function NavBar() {
         navigate({to: `/${page}`})
     };
 
+    const handleOnPageSelect = () => {
+        
+    }
 
 
 
     return (
-        <AppBar position="static">
+        <AppBar position="static" color={"inherit"} sx={{backgroundColor: "rgba(255,255,255,0.37)"}}>
             <Container maxWidth="xl">
                 <Toolbar disableGutters>
                     <Typography
@@ -39,18 +40,19 @@ export function NavBar() {
                         component="a"
                         href="#app-bar-with-responsive-menu"
                         sx={{
-                            mr: 2,
+                            mr: 5,
                             display: { xs: 'none', md: 'flex' },
                             fontFamily: 'monospace',
-                            fontWeight: 700,
+                            fontWeight: 800,
                             letterSpacing: '.3rem',
                             color: 'inherit',
-                            textDecoration: 'none',
+                            textDecoration: "none",
                         }}
                     >
-                        HUE CONTROLL
+                        HUE CONTROL
                     </Typography>
-
+                    
+                    
                     <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
                         <IconButton
                             size="large"
@@ -94,11 +96,11 @@ export function NavBar() {
                             textDecoration: 'none',
                         }}
                     >
-                        ControleIT
                     </Typography>
+                    <Divider orientation={"vertical"}/>
                     <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex', alignItems: 'center' } }}>
                         {pages.map((page) => (
-                            <Button sx={{}} onClick={() => handleOnPageChange(page)}>
+                            <Button sx={{}} onClick={() => handleOnPageChange(page)} >
                                 <Typography sx={{color: "black"}}>
                                     {page}
                                 </Typography>
@@ -106,11 +108,7 @@ export function NavBar() {
                             ))}
                     </Box>
                     <Box sx={{ flexGrow: 0 }}>
-                        <Tooltip title="Open settings">
-                            <IconButton onClick={undefined} sx={{ p: 0 }}>
-                                <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
-                            </IconButton>
-                        </Tooltip>
+                        
                         <Menu
                             //sx={{ mt: '45px' }}
                             id="menu-appbar"
