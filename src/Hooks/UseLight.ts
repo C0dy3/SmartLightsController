@@ -8,5 +8,7 @@ export const UseLight = () => {
         queryKey: ["light"],
         queryFn: () => fetchLight(),
         staleTime: 1000 * 30,
+        retry: 0,
+        
     });
 };

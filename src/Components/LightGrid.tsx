@@ -1,5 +1,5 @@
 ﻿import type {LightReadDto} from "../Dto/LightReadDto.ts";
-import {Box, Button, Grid, InputLabel, List, ListItem, Paper, Slider, Stack, Typography} from "@mui/material";
+import {Box, Button, Divider, Grid, InputLabel, List, ListItem, Paper, Slider, Stack, Typography} from "@mui/material";
 import {type RgbaColor, RgbaColorPicker} from "react-colorful";
 import React from "react";
 
@@ -25,9 +25,9 @@ export function LightGrid({data, handleTurnOn, handleBrightness, handeOnColorCha
                     key={light.id}
                     elevation={5} 
                     sx={{
-                        p: 3, // padding uvnitř
-                        borderRadius: 2, // zaoblené rohy
-                        backgroundColor: "#c5c5c5", // světle šedé pozadí
+                        p: 3,
+                        borderRadius: 2, 
+                        backgroundColor: "#c5c5c5",
                         display: "flex",
                         flexDirection: "row",
                         alignItems: "center",
@@ -37,29 +37,36 @@ export function LightGrid({data, handleTurnOn, handleBrightness, handeOnColorCha
                     <Box sx={{ flex: 1 }}>
                         <ListItem>
                             <Typography sx={{fontSize: "1.5rem"}}>
-                                ID: {light.id}
-                            </Typography>
-                        </ListItem>
-                        <ListItem>
-                            <Typography sx={{fontSize: "1.5rem"}}>
                                 {light.name}
                             </Typography>
                         </ListItem>
+                        <Divider>
+                            <Typography sx={{fontSize: "0.8rem"}}>
+                                Obecné informace
+                            </Typography>
+                        </Divider>
+                        
                         <ListItem>
-                            <Typography sx={{fontSize: "1.5rem", color: light.state.on ? "#0aff00" : "#f30c0c", boxShadow: 2}}>
-                                Zapnuto
+                            <Typography sx={{fontSize: "1.5rem", color: light.state.on ? "#19750a" : "#931414", boxShadow: 0}}>
+                                {light.state.on ? "Zapnuto" : "Vypnuto"}
                             </Typography>
                         </ListItem>
-                        <ListItem>Světlost: {light.state.bri}</ListItem>
+                        <ListItem>
+                            <Typography>
+                                Světlost: {light.state.bri}
+                        </Typography>
+                           </ListItem>
                         {light.state.hue !== undefined && (
                             <ListItem>Odstín: {light.state.hue}</ListItem>
                         )}
                         {light.state.sat !== undefined && (
                             <ListItem>Saturace: {light.state.sat}</ListItem>
                         )}
-                        <ListItem>Barva: {light.state.xy}</ListItem>
                     </Box>
 
+                    <Divider orientation={"vertical"}>
+                        <Typography sx={{fontSize: "0.8rem"}}>Nastavení</Typography>
+                    </Divider>
                     <Stack sx={{ width: "20rem" }} spacing={2}>
                         <InputLabel>Jasnost</InputLabel>
                         <Slider
@@ -72,18 +79,20 @@ export function LightGrid({data, handleTurnOn, handleBrightness, handeOnColorCha
                                 )
                             }
                         />
-                        <InputLabel>Barva</InputLabel>
-                        {/* sem můžeš dát další ovládací prvky pro barvu */}
+                        <InputLabel>Stav</InputLabel>
                         <Button
                             variant="contained"
                             onClick={() => handleTurnOn(light.id, light.state.on)}
                         >
                             {light.state.on ? "Vypnout" : "Zapnout"}
                         </Button>
-                        
                     </Stack>
+                    <Box sx={{display: "flex", flexDirection: "column", gap: 2}}>
+                        <InputLabel>Barva</InputLabel>
                         <RgbaColorPicker color={xyToRgb(light.state.xy[0],light.state.xy[1], light.state.bri)}
-                        onChange={(color) => handeOnColorChange(color, light.id)}/>
+                                         onChange={(color) => handeOnColorChange(color, light.id)}/>
+                    </Box>
+                        
                 </Paper>
             ))}
         </Box>

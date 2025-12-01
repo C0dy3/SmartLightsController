@@ -1,56 +1,137 @@
-﻿import {useNavigate} from "@tanstack/react-router";
-import {
+﻿import {
     Box,
     Button,
-    Link
+    AppBar,
+    Container,
+    Toolbar,
+    Typography,
+    IconButton,
+    Menu, Divider
 } from "@mui/material";
-import React from "react";
-import { MenuItem, Sidebar, Submenu, Menu} from "react-mui-sidebar";
+import {useNavigate} from "@tanstack/react-router";
 
-interface DrawerProps {
-    isOpen: boolean;
-    darkMode: boolean;
-}
 
-export function NavBar({ isOpen, darkMode }: DrawerProps) {
+const pages = ["lights","groups","settings","about"]
+
+
+
+export function NavBar() {
+
+    const navigate = useNavigate();
+
+
+    const handleOnPageChange = (page : string) => {
+        navigate({to: `/${page}`})
+    };
+
+    const handleOnPageSelect = () => {
+        
+    }
+
+
+
     return (
-        <Sidebar
-            width="auto"
-            showProfile={false}
-            themeColor="#4c67bd"
-            themeSecondaryColor="#4c5159"
-            mode={darkMode ? "dark" : "light"}
-            isCollapse={!isOpen}
-        >
-            <Menu subHeading="HLAVNÍ">
-                <MenuItem component={Link} link="/lights" badge isSelected>
-                    Světla
-                </MenuItem>
-                <MenuItem component={Link} link="/groups">Skupiny</MenuItem>
-                <MenuItem component={Link} link="/ana">Scény</MenuItem>
-            </Menu>
-            <Menu>
-                <Submenu title="Konfigurace">
-                    <MenuItem>Most</MenuItem>
-                    <MenuItem>Světla</MenuItem>
-                </Submenu>
-                <MenuItem>Nastavení</MenuItem>
-            </Menu>
-        </Sidebar>
+        <AppBar position="static" color={"inherit"} sx={{backgroundColor: "rgba(255,255,255,0.37)"}}>
+            <Container maxWidth="xl">
+                <Toolbar disableGutters>
+                    <Typography
+                        variant="h6"
+                        noWrap
+                        component="a"
+                        href="#app-bar-with-responsive-menu"
+                        sx={{
+                            mr: 5,
+                            display: { xs: 'none', md: 'flex' },
+                            fontFamily: 'monospace',
+                            fontWeight: 800,
+                            letterSpacing: '.3rem',
+                            color: 'inherit',
+                            textDecoration: "none",
+                        }}
+                    >
+                        HUE CONTROL
+                    </Typography>
+                    
+                    
+                    <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
+                        <IconButton
+                            size="large"
+                            aria-label="account of current user"
+                            aria-controls="menu-appbar"
+                            aria-haspopup="true"
+                            //onClick={handleOpenNavMenu}
+                            color="inherit"
+                        >
+
+                        </IconButton>
+                        <Menu
+                            anchorOrigin={{
+                                vertical: 'bottom',
+                                horizontal: 'left',
+                            }}
+                            keepMounted
+                            transformOrigin={{
+                                vertical: 'top',
+                                horizontal: 'left',
+                            }}
+
+                            sx={{display: {xs: 'block', md: 'none'}}} open={false}                        >
+
+                        </Menu>
+                    </Box>
+
+                    <Typography
+                        variant="h5"
+                        noWrap
+                        component="a"
+                        href="#app-bar-with-responsive-menu"
+                        sx={{
+                            mr: 2,
+                            display: { xs: 'flex', md: 'none' },
+                            flexGrow: 1,
+                            fontFamily: 'monospace',
+                            fontWeight: 700,
+                            letterSpacing: '.3rem',
+                            color: 'inherit',
+                            textDecoration: 'none',
+                        }}
+                    >
+                    </Typography>
+                    <Divider orientation={"vertical"}/>
+                    <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex', alignItems: 'center' } }}>
+                        {pages.map((page) => (
+                            <Button sx={{}} onClick={() => handleOnPageChange(page)} >
+                                <Typography sx={{color: "black"}}>
+                                    {page}
+                                </Typography>
+                            </Button>
+                            ))}
+                    </Box>
+                    <Box sx={{ flexGrow: 0 }}>
+                        
+                        <Menu
+                            //sx={{ mt: '45px' }}
+                            id="menu-appbar"
+                            anchorEl={undefined}
+                            anchorOrigin={{
+                                vertical: 'top',
+                                horizontal: 'right',
+                            }}
+                            keepMounted
+                            transformOrigin={{
+                                vertical: 'top',
+                                horizontal: 'right',
+                            }}
+                            //open={Boolean(anchorElUser)}
+                            //onClose={handleCloseUserMenu}
+                        >
+
+                        </Menu>
+                    </Box>
+                </Toolbar>
+            </Container>
+        </AppBar>
     );
 }
 
-export function DrawerContainer() {
-    const [open, setOpen] = React.useState(false);
 
-    const toggleDrawer = () => setOpen((prev) => !prev);
-
-    return (
-        <Box sx={{width: "15rem"}}>
-            <Button onClick={toggleDrawer}>
-                {open ? "Close drawer" : "Open drawer"}
-            </Button>
-            <NavBar isOpen={open} darkMode={false} />
-        </Box>
-    );
-}

@@ -5,6 +5,7 @@ import {Loading} from "../Components/Loading.tsx";
 import {LightGrid} from "../Components/LightGrid.tsx";
 import {usePutUpdateColor} from "../Hooks/UsePutUpdateColor.ts";
 import type {RgbaColor} from "react-colorful";
+import {FetchErrorPage} from "../Page/FetchErrorPage.tsx";
 
 export function LightControlContainer(){
     const {mutate, isPending} = useUpdateLights(1);
@@ -74,6 +75,7 @@ export function LightControlContainer(){
         b = Math.min(Math.max(b, 0), 1)
 
         return {
+            a: 0,
             r: Math.round(r * 255),
             g: Math.round(g * 255),
             b: Math.round(b * 255)
@@ -97,7 +99,7 @@ export function LightControlContainer(){
 
     if (error){
         return (
-            <p>Chyba při načítání dat</p>
+            <FetchErrorPage error={error} />
         )
     }
 

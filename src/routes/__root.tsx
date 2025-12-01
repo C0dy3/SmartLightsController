@@ -1,9 +1,8 @@
-import * as React from 'react'
 import { Outlet, createRootRoute } from '@tanstack/react-router'
 import {Footer} from "../Components/Footer.tsx";
 import {Box} from "@mui/material";
-import {DrawerContainer} from "../Components/NavBar.tsx";
-import {Header} from "../Components/Header.tsx";
+import { NavBar} from "../Components/NavBar.tsx";
+import backgroud from "../Images/background_Image.jpg"
 
 export const Route = createRootRoute({
   component: RootComponent,
@@ -11,20 +10,36 @@ export const Route = createRootRoute({
 
 function RootComponent() {
   return (
-      <Box sx={{ display: "flex", flexDirection: "row", height: "auto", width: "auto" }}>
-          
-          <Box sx={{ width: "auto", flexShrink: 0 }}>
-              <DrawerContainer />
-          </Box>
 
-          
-          <Box sx={{ display: "flex", flexDirection: "column", flex: 1 }}>
-              <Header />
-              <Box sx={{ flexGrow: 1, overflow: "auto" }}>
-                  <Outlet /> 
-              </Box>
-              <Footer />
-          </Box>
+      <Box sx={{
+          display: "flex", 
+          backgroundImage: `url(${backgroud})`, 
+          backgroundRepeat: "no-repeat", 
+          backgroundSize: "cover",}}>
+        <Box
+            sx={{
+                display: "flex",
+                flexDirection: "column",
+                minHeight: "100vh",
+                width: "100%",
+            }}
+        >
+            <NavBar />
+            <Box component="main" sx={{ flexGrow: 3, p: 3, 
+                display: "flex", 
+                flexDirection: "column" }}>
+                <Outlet />
+            </Box>
+            <Box sx={{
+                display:"flex", 
+                flexDirection: "column",
+                alignItems: "center",
+                minWidth: "100vh"
+            }}>
+            <Footer />
+            </Box>
+        </Box>
       </Box>
+
   )
 }
