@@ -3,6 +3,7 @@ import {Footer} from "../Components/Footer.tsx";
 import {Box} from "@mui/material";
 import { NavBar} from "../Components/NavBar.tsx";
 import backgroud from "../Images/background_Image.jpg"
+import { HueProvider } from "../Context/HueBridgeContext.tsx";
 
 export const Route = createRootRoute({
   component: RootComponent,
@@ -10,7 +11,7 @@ export const Route = createRootRoute({
 
 function RootComponent() {
   return (
-
+      <HueProvider>
       <Box sx={{
           display: "flex", 
           backgroundImage: `url(${backgroud})`, 
@@ -40,6 +41,7 @@ function RootComponent() {
             </Box>
         </Box>
       </Box>
+      </HueProvider>
 
   )
 }

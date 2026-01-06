@@ -12,6 +12,8 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as SettingsRouteImport } from './routes/settings'
 import { Route as LightsRouteImport } from './routes/lights'
 import { Route as GroupsRouteImport } from './routes/groups'
+import { Route as ConnectRouteImport } from './routes/connect'
+import { Route as AboutRouteImport } from './routes/about'
 import { Route as IndexRouteImport } from './routes/index'
 
 const SettingsRoute = SettingsRouteImport.update({
@@ -29,6 +31,16 @@ const GroupsRoute = GroupsRouteImport.update({
   path: '/groups',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ConnectRoute = ConnectRouteImport.update({
+  id: '/connect',
+  path: '/connect',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AboutRoute = AboutRouteImport.update({
+  id: '/about',
+  path: '/about',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
@@ -37,12 +49,16 @@ const IndexRoute = IndexRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/about': typeof AboutRoute
+  '/connect': typeof ConnectRoute
   '/groups': typeof GroupsRoute
   '/lights': typeof LightsRoute
   '/settings': typeof SettingsRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/about': typeof AboutRoute
+  '/connect': typeof ConnectRoute
   '/groups': typeof GroupsRoute
   '/lights': typeof LightsRoute
   '/settings': typeof SettingsRoute
@@ -50,20 +66,31 @@ export interface FileRoutesByTo {
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/about': typeof AboutRoute
+  '/connect': typeof ConnectRoute
   '/groups': typeof GroupsRoute
   '/lights': typeof LightsRoute
   '/settings': typeof SettingsRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/groups' | '/lights' | '/settings'
+  fullPaths: '/' | '/about' | '/connect' | '/groups' | '/lights' | '/settings'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/groups' | '/lights' | '/settings'
-  id: '__root__' | '/' | '/groups' | '/lights' | '/settings'
+  to: '/' | '/about' | '/connect' | '/groups' | '/lights' | '/settings'
+  id:
+    | '__root__'
+    | '/'
+    | '/about'
+    | '/connect'
+    | '/groups'
+    | '/lights'
+    | '/settings'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AboutRoute: typeof AboutRoute
+  ConnectRoute: typeof ConnectRoute
   GroupsRoute: typeof GroupsRoute
   LightsRoute: typeof LightsRoute
   SettingsRoute: typeof SettingsRoute
@@ -92,6 +119,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof GroupsRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/connect': {
+      id: '/connect'
+      path: '/connect'
+      fullPath: '/connect'
+      preLoaderRoute: typeof ConnectRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/about': {
+      id: '/about'
+      path: '/about'
+      fullPath: '/about'
+      preLoaderRoute: typeof AboutRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/': {
       id: '/'
       path: '/'
@@ -104,6 +145,8 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AboutRoute: AboutRoute,
+  ConnectRoute: ConnectRoute,
   GroupsRoute: GroupsRoute,
   LightsRoute: LightsRoute,
   SettingsRoute: SettingsRoute,

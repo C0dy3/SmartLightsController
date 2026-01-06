@@ -1,29 +1,30 @@
 ﻿
 import { useNavigate } from "@tanstack/react-router";
 import {Box, Button, Container, Stack, Typography} from "@mui/material";
-
-
+import {UseFetchBridges} from "../Hooks/UseFetchBridges.ts";
 
 export function ConnectPage() {
-    const navigate = useNavigate();
 
     const handleConnect = () => {
-        
-        navigate({ to: "/lights" });
+        return (
+            <Typography>Nothing for now</Typography>
+        )
     };
 
     return (
 
         <Container
             sx={{
-                position: "relative",       
                 display: "flex",
                 flexDirection: "column",
+                alignSelf: "center",
                 justifyContent: "center",   
                 alignItems: "center",       
-                height: "87vh",             
+                height: "auto",
+                p: 2,
                 width: "100%",              
-                overflow: "hidden"          
+                overflow: "hidden",
+                backgroundColor: "white",
             }}
         >
             <Stack

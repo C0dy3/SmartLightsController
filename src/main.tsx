@@ -7,8 +7,8 @@ import {TanStackRouterDevtools} from "@tanstack/react-router-devtools";
 import {routeTree} from "./routeTree.gen.ts";
 import {StrictMode} from "react";
 import {ReactQueryDevtools} from "@tanstack/react-query-devtools";
-import {NotFoundPage} from "./Page/NotFoundPage.tsx"; 
-
+import {NotFoundPage} from "./Page/NotFoundPage.tsx";
+import {HueProvider} from "./Context/HueBridgeContext.tsx";
 
 
 const queryClient = new QueryClient({
@@ -22,10 +22,6 @@ const router
             <NotFoundPage/>
         )
     }})
-
-
-
-
 
 
 createRoot(document.getElementById('root')!).render(
