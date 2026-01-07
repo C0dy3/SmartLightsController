@@ -12,6 +12,7 @@ interface SettignsPageProps{
     settings: string[],
     handleOnSettingsChange: (settings: string[]) => void,
     hueData: BridgeReadDto | undefined;
+    disconectBridge: () => void;
 }
 
 export function SettingsPage(props : SettignsPageProps){
@@ -31,7 +32,7 @@ export function SettingsPage(props : SettignsPageProps){
 
                     <Button variant={"contained"}>Reset light settings</Button>
                     <Button variant={"contained"}>Restart hue bridge</Button>
-                    <Button variant={"contained"}>Disconnect from bridge</Button>
+                    <Button variant={"contained"} onClick={() => props.disconectBridge()}>Disconnect from bridge</Button>
 
                 </Box>
 

@@ -13,11 +13,16 @@ export function SettingsContainer(){
         settings[1] = "v.1"
     }
 
+    const disconectBridge = () => {
+        hueData?.disconnect()
+    }
+
     return(
         <SettingsPage
             settings={settings}
             handleOnSettingsChange={handleChange}
             hueData={hueData?.hueData}
+            disconectBridge={disconectBridge}
         />
     )
 }

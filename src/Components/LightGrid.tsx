@@ -1,7 +1,9 @@
 ﻿import type {LightReadDto} from "../Dto/LightReadDto.ts";
 import {Box, Button, Divider, Grid, InputLabel, List, ListItem, Paper, Slider, Stack, Typography} from "@mui/material";
 import {type RgbaColor, RgbaColorPicker} from "react-colorful";
+import {ConnectToBridge} from "./ConnectToBridge.tsx";
 import React from "react";
+import type {BridgeReadDto} from "../Dto/BridgeReadDto.ts";
 
 
 
@@ -11,11 +13,12 @@ interface LightGridProps{
     handleBrightness: (value: number ,ligthId : number) => void
     handeOnColorChange: (color : {r: number; g: number; b: number, a: number}, lightId: number) => void;
     xyToRgb: (x: number, y: number, bri: number) => RgbaColor;
+    hueData: BridgeReadDto;
     
 }
 
 
-export function LightGrid({data, handleTurnOn, handleBrightness, handeOnColorChange, xyToRgb} : LightGridProps){
+export function LightGrid({data, handleTurnOn, handleBrightness, handeOnColorChange, xyToRgb, hueData} : LightGridProps){
     
     
     return (

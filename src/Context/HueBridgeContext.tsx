@@ -4,6 +4,7 @@ import type {BridgeReadDto} from "../Dto/BridgeReadDto.ts";
 export interface HueContextType {
     hueData: BridgeReadDto
     saveConnection: (ip: string | null, accessCode: string, id: string | null, port: number | null ) => void;
+    disconnect: () => void;
 }
 
 const hueContext = createContext<HueContextType | undefined>(undefined);
@@ -47,8 +48,13 @@ export const HueProvider = ({children}: HueBridgeContextType) => {
         })
     }
 
+    const disconnect = () => {
+        localStorage.removeItem("hue_control_app_data");
+        setHueData({connected: false})
+    }
+
     return (
-        <hueContext.Provider value={{ hueData, saveConnection }}>
+        <hueContext.Provider value={{ hueData, saveConnection, disconnect }}>
             {children}
         </hueContext.Provider>
     );
