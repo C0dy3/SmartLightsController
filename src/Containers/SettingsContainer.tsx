@@ -5,7 +5,7 @@ export function SettingsContainer(){
 
     const settings = ["Bridge IP", "API version", "Number of connected lights"]
 
-    const { hueData, saveConnection } = useHue();
+    const hueData = useHue();
 
     const handleChange = (changes : string[]) => {
         //There will be the connect logic implemented
@@ -17,6 +17,7 @@ export function SettingsContainer(){
         <SettingsPage
             settings={settings}
             handleOnSettingsChange={handleChange}
+            hueData={hueData?.hueData}
         />
     )
 }

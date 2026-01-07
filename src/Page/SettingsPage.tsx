@@ -5,22 +5,23 @@ import {
     Button
 
 } from "@mui/material";
-import {useHue} from "../Context/HueBridgeContext.tsx";
 import {useNavigate} from "@tanstack/react-router";
+import type {BridgeReadDto} from "../Dto/BridgeReadDto.ts";
 
 interface SettignsPageProps{
     settings: string[],
     handleOnSettingsChange: (settings: string[]) => void,
+    hueData: BridgeReadDto | undefined;
 }
 
 export function SettingsPage(props : SettignsPageProps){
 
-    const { hueData } = useHue()
+
 
     const navigate = useNavigate();
 
     const connectedButtons = () => {
-        if(hueData.connected){
+        if(props.hueData?.connected){
             return (
                 <Box sx={{flexGrow: 1,
                     display: "flex",
@@ -30,6 +31,8 @@ export function SettingsPage(props : SettignsPageProps){
 
                     <Button variant={"contained"}>Reset light settings</Button>
                     <Button variant={"contained"}>Restart hue bridge</Button>
+                    <Button variant={"contained"}>Disconnect from bridge</Button>
+
                 </Box>
 
             )
@@ -53,11 +56,20 @@ export function SettingsPage(props : SettignsPageProps){
     const hueSettings = () => {
         return (
             <>
-            {props.settings.map(( setting ) => (
-                    <Typography sx={{color: "black"}}>
-                        {setting}
-                    </Typography>
-                ))}
+
+                <Typography sx={{color: "black"}}>
+                    Bridge ID: {props.hueData?.id}
+                </Typography>
+                <Typography sx={{color: "black"}}>
+                    Bridge port: {props.hueData?.port}
+                </Typography>
+                <Typography sx={{color: "black"}}>
+                    Bridge IP: {props.hueData?.internalipaddress}
+                </Typography>
+                <Typography sx={{color: "black"}}>
+                    Bridge connected: {props.hueData?.connected + ""}
+                </Typography>
+
             </>
         )
     }
@@ -77,7 +89,7 @@ export function SettingsPage(props : SettignsPageProps){
                 minHeight: "25vh",
                 minWidth:"100%"
             }}>
-                {hueData.connected == false ?
+                {props.hueData?.connected == false ?
                     <Typography sx={{fontSize: "1rem", p: 2}}>
                     Nejdříve se připojte ke svému hue bridge, abyste mohli svá světla ovládat
                 </Typography>

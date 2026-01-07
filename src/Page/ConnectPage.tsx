@@ -1,9 +1,16 @@
 ﻿
-import { useNavigate } from "@tanstack/react-router";
 import {Box, Button, Container, Stack, Typography} from "@mui/material";
-import {UseFetchBridges} from "../Hooks/UseFetchBridges.ts";
+import type {BridgeReadDto} from "../Dto/BridgeReadDto.ts";
+import {JSX} from "react";
+import {BridgeGrid} from "../Components/BridgeGrid.tsx";
 
-export function ConnectPage() {
+interface ConnectPageProps {
+    bridges : BridgeReadDto[] | undefined;
+    handleSelect: (bridge: BridgeReadDto) => void;
+}
+
+
+export function ConnectPage({bridges, handleSelect}: ConnectPageProps): JSX.Element {
 
     const handleConnect = () => {
         return (
@@ -25,6 +32,7 @@ export function ConnectPage() {
                 width: "100%",              
                 overflow: "hidden",
                 backgroundColor: "white",
+                gap: 2
             }}
         >
             <Stack
@@ -48,6 +56,9 @@ export function ConnectPage() {
                 <Button variant="contained" size="large" onClick={handleConnect} sx={{borderRadius: 4}}>
                     Připojit Bridge
                 </Button>
+                </Box>
+                <Box sx={{display: "flex", flexDirection: "column", gap: 2, p: 2}}>
+                    <BridgeGrid bridges={bridges} handleSelect={handleSelect}/>
                 </Box>
             </Stack>
         </Container>

@@ -1,7 +1,8 @@
 ﻿import type {LightReadDto} from "../Dto/LightReadDto.ts";
 
-export const fetchLight = async () : Promise<LightReadDto[]> => {
-    const res = await fetch(`http://192.168.0.70/api/rDUOUCsiWz7SPMyXHv9Exbcw7xgYh7yr3Dsq61bj/lights`);
+export const fetchLight = async (bridgeIp: string | null | undefined) : Promise<LightReadDto[]> => {
+
+    const res = await fetch("http://" + bridgeIp + "/api/rDUOUCsiWz7SPMyXHv9Exbcw7xgYh7yr3Dsq61bj/lights");
     if (!res.ok){
         throw new Error(`${res.statusText}`);
     }

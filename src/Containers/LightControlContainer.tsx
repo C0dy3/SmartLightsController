@@ -6,13 +6,16 @@ import {LightGrid} from "../Components/LightGrid.tsx";
 import {usePutUpdateColor} from "../Hooks/UsePutUpdateColor.ts";
 import type {RgbaColor} from "react-colorful";
 import {FetchErrorPage} from "../Page/FetchErrorPage.tsx";
+import {useHue} from "../Context/HueBridgeContext.tsx";
 
 export function LightControlContainer(){
     const {mutate, isPending} = useUpdateLights(1);
     const {mutate : mutateBri, isPending : isPendingBri} = useChangeBrightness(1);
     const {mutate: mutateColor, isPending: isPendingColor} = usePutUpdateColor();
 
-    const {data, isLoading, error} = UseLight();
+    const bridgeData = useHue();
+
+    const {data, isLoading, error} = UseLight(bridgeData?.hueData.internalipaddress);
 
     const HandleTurnOn = (lightId: number, current: boolean) => {
         mutate({ on: !current, lightId });

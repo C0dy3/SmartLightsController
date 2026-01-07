@@ -1,19 +1,48 @@
-import {createContext, useContext, useState} from "react";
+import {createContext, type ReactNode, useContext, useEffect, useState} from "react";
+import type {BridgeReadDto} from "../Dto/BridgeReadDto.ts";
 
-const hueContext = createContext();
+export interface HueContextType {
+    hueData: BridgeReadDto
+    saveConnection: (ip: string | null, accessCode: string, id: string | null, port: number | null ) => void;
+}
 
-export const HueProvider = ({children}) => {
-    const [hueData, setHueData] = useState({
-        ip: null,
-        accessCode: null,
-        connected: false
+const hueContext = createContext<HueContextType | undefined>(undefined);
+
+interface HueBridgeContextType {
+    children : ReactNode;
+}
+
+export const HueProvider = ({children}: HueBridgeContextType) => {
+    const [hueData, setHueData] = useState(() => {
+
+        const savedData = localStorage.getItem("hue_control_app_data");
+
+        if(savedData) {
+            try {
+                return JSON.parse(savedData);
+            } catch (e) {
+                console.log("Failed while loading data from local storage" + e);
+                return null;
+            }
+
+            return null;
+        }
     })
 
+    useEffect(() => {
+        localStorage.setItem("hue_control_app_data", JSON.stringify(hueData));
+    }, [hueData]);
 
-    const saveConnection = (ip, accessCode) => {
+
+
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    //@ts-expect-error
+    const saveConnection = (ip, accessCode, id, port) => {
         setHueData({
-            ip: ip,
+            id: id,
+            internalipaddress: ip,
             accessCode: accessCode,
+            port: port,
             connected: true
         })
     }
@@ -25,6 +54,7 @@ export const HueProvider = ({children}) => {
     );
 };
 
+// eslint-disable-next-line react-refresh/only-export-components
 export const useHue = () => {
     return useContext(hueContext);
 };

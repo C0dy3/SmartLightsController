@@ -1,5 +1,6 @@
 export interface BridgeReadDto {
-    id: string;
-    internalipaddress: string;
-    port: number;
+    id: string | null;
+    internalipaddress: string | null;
+    port: number | null;
+    connected: boolean | null;
 }

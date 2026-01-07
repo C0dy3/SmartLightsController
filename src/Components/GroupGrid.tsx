@@ -19,9 +19,9 @@ export function GroupGrid({data} : GroupGridProps){
                     key={group.id}
                     elevation={5}
                     sx={{
-                        p: 3, // padding uvnitř
-                        borderRadius: 2, // zaoblené rohy
-                        backgroundColor: "#c5c5c5", // světle šedé pozadí
+                        p: 3,
+                        borderRadius: 2,
+                        backgroundColor: "#c5c5c5",
                         display: "flex",
                         flexDirection: "row",
                         alignItems: "center",
