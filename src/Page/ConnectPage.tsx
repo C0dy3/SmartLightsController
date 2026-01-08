@@ -1,8 +1,8 @@
 ﻿
-import {Box, Button, Container, Stack, Typography} from "@mui/material";
+import {Box, Button, Container, Stack, Typography, Divider} from "@mui/material";
 import type {BridgeReadDto} from "../Dto/BridgeReadDto.ts";
-import {JSX} from "react";
 import {BridgeGrid} from "../Components/BridgeGrid.tsx";
+import {JSX} from "react";
 
 interface ConnectPageProps {
     bridges : BridgeReadDto[] | undefined;
@@ -12,11 +12,6 @@ interface ConnectPageProps {
 
 export function ConnectPage({bridges, handleSelect}: ConnectPageProps): JSX.Element {
 
-    const handleConnect = () => {
-        return (
-            <Typography>Nothing for now</Typography>
-        )
-    };
 
     return (
 
@@ -52,11 +47,11 @@ export function ConnectPage({bridges, handleSelect}: ConnectPageProps): JSX.Elem
                 <Typography sx={{alignSelf: 'center'}}>
                     Aby jsi mohl svůj bridge připojit, prosím klikni na tlačítko na něm po dobu alespoň 3 sekund, poté stiskni Připojit Bridge
                 </Typography>
-                <Box sx={{paddingTop: "5rem", alignSelf: "center"}}>
-                <Button variant="contained" size="large" onClick={handleConnect} sx={{borderRadius: 4}}>
-                    Připojit Bridge
-                </Button>
-                </Box>
+                <Divider/>
+                <Typography sx={{alignSelf: 'center', fontSize:"1.2rem"}}>
+                    Vyber jeden z níže nalezených bridge na tvé lokální síti
+                </Typography>
+
                 <Box sx={{display: "flex", flexDirection: "column", gap: 2, p: 2}}>
                     <BridgeGrid bridges={bridges} handleSelect={handleSelect}/>
                 </Box>

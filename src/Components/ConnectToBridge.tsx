@@ -13,9 +13,13 @@ export function ConnectToBridge(){
             justifyContent: "space-between",
             alignItems: "center",
             backgroundColor: "white",
+            gap: 3,
+            p:2,
+            borderRadius:2,
+            minHeight: "10vh"
         }}>
-            <Typography sx={{fontSize: "1rem"}}>
-                Pro zobrazení vašich světel, připojte svůj Hue bridge v nastavení, nebo kliknutím na tlačítko níže
+            <Typography sx={{fontSize: "1.1rem"}}>
+                Pro zobrazení vašich světel a jejich ovládání, připojte svůj Hue bridge v nastavení, nebo kliknutím na tlačítko níže
             </Typography>
             <Button variant={"contained"} onClick={() => navigate({to: "/connect"})}>Připojit nový bridge</Button>
         </Box>

@@ -57,7 +57,6 @@ export function SettingsPage(props : SettignsPageProps){
     const hueSettings = () => {
         return (
             <>
-
                 <Typography sx={{color: "black"}}>
                     Bridge ID: {props.hueData?.id}
                 </Typography>

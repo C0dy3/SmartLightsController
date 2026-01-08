@@ -1,6 +1,7 @@
 import type {BridgeReadDto} from "../Dto/BridgeReadDto.ts";
-import {Box, Typography, ListItem, Button} from "@mui/material";
-import React from "react";
+import {Box, Typography, ListItem, Button, Dialog, DialogTitle, DialogContent} from "@mui/material";
+import React, {useState} from "react";
+import {ConnectForm} from "../Forms/ConnectForm.tsx";
 
 interface BridgeGridProps {
     bridges : BridgeReadDto[] | undefined
@@ -10,6 +11,18 @@ interface BridgeGridProps {
 
 
 export function BridgeGrid({bridges, handleSelect}: BridgeGridProps){
+
+    const [open, setOpen] = useState<boolean>(false);
+
+    const handleOpen = (bridge: BridgeReadDto) => {
+
+        handleSelect(bridge);
+        setOpen(true);
+    };
+
+    const handleClose = () => setOpen(false);
+
+
 
     return(
         <Box sx={{
@@ -50,9 +63,17 @@ export function BridgeGrid({bridges, handleSelect}: BridgeGridProps){
                     </ListItem>
 
                     <ListItem>
-                        <Button variant={"contained"} onClick={() => handleSelect(bridge)}>Vybrat</Button>
+                        <Button variant={"contained"} onClick={() => handleOpen(bridge)}>Vybrat</Button>
                     </ListItem>
                 </ListItem>
+
+                    <Dialog open={open} onClose={handleClose}>
+                        <DialogTitle>Nastavení připojení</DialogTitle>
+                        <DialogContent>
+                            <ConnectForm/>
+                        </DialogContent>
+
+                    </Dialog>
                 </Box>
                 )
             )}
