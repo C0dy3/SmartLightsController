@@ -3,10 +3,12 @@ import {useForm} from "react-hook-form";
 import { connectSchema, type ConnectFormValues } from "./ConnectSchema.ts";
 import {zodResolver} from "@hookform/resolvers/zod";
 import {Box,TextField,Button} from "@mui/material"
+import {useNavigate} from "@tanstack/react-router";
 
 export const ConnectForm = () => {
 
     const hueData = useHue();
+    const navigate = useNavigate();
 
     const { register, handleSubmit, formState: { errors, isSubmitting} } =
         useForm<ConnectFormValues>({

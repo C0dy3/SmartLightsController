@@ -77,7 +77,7 @@ export function SettingsPage(props : SettignsPageProps){
 
     return(
     <Box sx={{}}>
-        <Paper elevation={1} sx={{borderRadius: 2}}>
+        <Paper elevation={1} sx={{borderRadius: 2, backgroundColor: "rgba(255,255,255,0.42)"}}>
             <Typography sx={{fontSize: "2rem", p: 2}}>Settings</Typography>
             <Box sx={{
                 flexGrow: 1,

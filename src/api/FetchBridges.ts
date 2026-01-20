@@ -35,6 +35,24 @@ export const FetchBridges = async (): Promise<BridgeReadDto[]> => {
             internalipaddress: "192.168.1.30", // <--- Sem si dej tu IP, co jsi zjistil (nebo vymyšlenou)
             port: 443,
             connected: null
+        } ,
+        {
+            id: "001788FFFE123456",
+            internalipaddress: "192.168.1.30", // <--- Sem si dej tu IP, co jsi zjistil (nebo vymyšlenou)
+            port: 443,
+            connected: null
+        } ,
+        {
+            id: "001788FFFE123456",
+            internalipaddress: "192.168.1.30", // <--- Sem si dej tu IP, co jsi zjistil (nebo vymyšlenou)
+            port: 443,
+            connected: null
+        } ,
+        {
+            id: "001788FFFE123456",
+            internalipaddress: "192.168.1.30", // <--- Sem si dej tu IP, co jsi zjistil (nebo vymyšlenou)
+            port: 443,
+            connected: null
         }
         ]
 }

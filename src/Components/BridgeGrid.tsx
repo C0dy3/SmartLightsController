@@ -1,6 +1,6 @@
 import type {BridgeReadDto} from "../Dto/BridgeReadDto.ts";
 import {Box, Typography, ListItem, Button, Dialog, DialogTitle, DialogContent} from "@mui/material";
-import React, {useState} from "react";
+import {useState} from "react";
 import {ConnectForm} from "../Forms/ConnectForm.tsx";
 
 interface BridgeGridProps {
@@ -29,7 +29,9 @@ export function BridgeGrid({bridges, handleSelect}: BridgeGridProps){
             display: "flex",
             flexDirection: "column",
             gap: 3,
-            p: 2
+            p: 2,
+            overflow: "hidden auto",
+            maxHeight: 300,
         }}>
             {bridges?.map((bridge) => (
                 <Box sx={{
@@ -38,25 +40,25 @@ export function BridgeGrid({bridges, handleSelect}: BridgeGridProps){
                     justifyContent: "space-between",
                     gap: 4,
                     alignItems: "center",
-                    backgroundColor: "rgba(104,97,97,0.29)",
+                    backgroundColor: "rgba(166,163,163,0.3)",
                     borderRadius: 4,
                     p: 1
 
                 }}>
                 <ListItem>
-                    <Typography>
+                    <Typography color={"white"}>
                         ID of bridge: {bridge.id}
                     </Typography>
                     <ListItem>
 
-                    <Typography>
+                    <Typography color={"white"}>
                         IP of bridge: {bridge.internalipaddress}
                     </Typography>
 
                     </ListItem>
                     <ListItem>
 
-                    <Typography>
+                    <Typography color={"white"}>
                         Bridge port: {bridge.port}
                     </Typography>
 

@@ -26,7 +26,8 @@ export function ConnectPage({bridges, handleSelect}: ConnectPageProps): JSX.Elem
                 p: 2,
                 width: "100%",              
                 overflow: "hidden",
-                backgroundColor: "white",
+                backgroundColor: "rgba(255,255,255,0.42)",
+                borderRadius: 4,
                 gap: 2
             }}
         >

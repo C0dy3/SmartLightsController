@@ -12,7 +12,7 @@ export function ConnectToBridge(){
             flexDirection: "column",
             justifyContent: "space-between",
             alignItems: "center",
-            backgroundColor: "white",
+            backgroundColor: "rgba(255,255,255,0.42)",
             gap: 3,
             p:2,
             borderRadius:2,

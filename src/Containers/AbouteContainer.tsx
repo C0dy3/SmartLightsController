@@ -18,7 +18,7 @@ export function AbouteContainer() {
         }}>
             <Box sx={{
                 width: "100vh",
-                backgroundColor: "white",
+                backgroundColor: "rgba(255,255,255,0.42)",
                 padding: 8,
                 borderRadius: 1,
                 boxShadow: 3,
