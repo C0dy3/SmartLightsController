@@ -9,7 +9,36 @@ export const GetGroups = async () : Promise<GroupReadDto[]> => {
     
     const data = await res.json();
     
-    return Object.entries(data).map(([id, group]: [string, any]) => ({
+    const mockData: Record<string, any> = {
+        "1":{
+            name: "Obývák",
+            type: "",
+            state: {all_on: true, any_on: false},
+        },
+        "2":{
+            name: "Ložnice",
+            type: "",
+            state: {all_on: true, any_on: false},
+        },
+        "3":{
+            name: "Pracovna",
+            type: "",
+            state: {all_on: true, any_on: false},
+        },
+        "4":{
+            name: "Garáž",
+            type: "",
+            state: {all_on: true, any_on: false},
+        },
+        "5":{
+            name: "Chodba",
+            type: "",
+            state: {all_on: true, any_on: false},
+        }
+    }
+    
+    
+    return Object.entries(mockData).map(([id, group]: [string, any]) => ({
         id: Number(id),
         name: group.name,
         state: group.state

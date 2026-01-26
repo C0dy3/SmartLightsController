@@ -21,15 +21,22 @@ export function LightGrid({data, handleTurnOn, handleBrightness, handeOnColorCha
     
     
     return (
-        <Box sx={{ display: "flex", flexDirection: "column", gap: 3, p: 2 }}>
+        <Box sx={{ 
+            display: "flex", 
+            flexDirection: "column", 
+            gap: 3,
+            p: 2, 
+            overflow: "hidden auto", 
+            maxHeight: "80vh", 
+        }}>
             {data.map((light) => (
                 <Paper
                     key={light.id}
-                    elevation={5} 
+                    elevation={5}
                     sx={{
                         p: 3,
                         borderRadius: 2, 
-                        backgroundColor: "#c5c5c5",
+                        backgroundColor: "rgba(255,255,255,0.42)",
                         display: "flex",
                         flexDirection: "row",
                         alignItems: "center",
@@ -70,7 +77,7 @@ export function LightGrid({data, handleTurnOn, handleBrightness, handeOnColorCha
                         <Typography sx={{fontSize: "0.8rem"}}>Nastavení</Typography>
                     </Divider>
                     <Stack sx={{ width: "20rem" }} spacing={2}>
-                        <InputLabel>Jasnost</InputLabel>
+                        <InputLabel>Jas</InputLabel>
                         <Slider
                             defaultValue={light.state.bri}
                             max={254}
@@ -94,9 +101,24 @@ export function LightGrid({data, handleTurnOn, handleBrightness, handeOnColorCha
                         <RgbaColorPicker color={xyToRgb(light.state.xy[0],light.state.xy[1], light.state.bri)}
                                          onChange={(color) => handeOnColorChange(color, light.id)}/>
                     </Box>
-                        
                 </Paper>
             ))}
+            <Box sx={{display: "flex", allignItems: "center", flexDirection: "column", alignItems: "center"}}>
+                <Paper sx={{ 
+                    p: 3,
+                    borderRadius: 2,
+                    backgroundColor: "rgba(255,255,255,0.42)",
+                    display: "flex",
+                    flexDirection: "row",
+                    alignItems: "center",
+                    gap: 4,
+                    minWidth: "188vh",
+                    justifyContent: "center",
+                    
+                }}>
+                    <Button variant={"contained"} >Přidat další příslušenství</Button>
+                </Paper>
+            </Box>
         </Box>
     )
     

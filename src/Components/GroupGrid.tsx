@@ -13,7 +13,8 @@ export function GroupGrid({data} : GroupGridProps){
     
     
     return(
-        <Box sx={{ display: "flex", flexDirection: "column", gap: 3, p: 2 }}>
+        <Box sx={{ display: "flex", flexDirection: "column", gap: 3, p: 2, overflow:"hidden auto",
+            maxHeight: "80vh" }}>
             {data.map((group) => (
                 <Paper
                     key={group.id}
